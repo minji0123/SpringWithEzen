@@ -8,11 +8,30 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 import mimmi.OracleConnector;
 
 // Data Access Object
-public class MemberDAO {
-
+public class MemberDBCP {
+	private DataSource _datasource = null;
+	private Connection _conn = null;
+	private PreparedStatement _stmt = null;
+	
+	public MemberDBCP() {
+		try {
+		Context ctx = new InitialContext();
+		Context env = (Context)ctx.lookup("java:/comp/env");
+		_datasource = (DataSource)env.lookup("jdbc/oracle");
+		}
+		catch(Exception e) {
+			System.out.println("[insertMember] SQLException : " + e.toString());
+		}
+	}
+	
+	
 	// new
 	public void insertMember(MemberVO memberVO) {
 		String sql = "INSERT INTO member (mid, mname, pwd, email) VALUES (?, ?, ?, ?)";
@@ -29,8 +48,7 @@ public class MemberDAO {
 			stmt.executeUpdate();
 
 			stmt.close();
-//			OracleConnector.closeConnection();
-
+			OracleConnector.closeConnection();
 		}
 		catch(SQLException e) {
 			System.out.println("[insertMember] SQLException : " + e.toString());
@@ -49,7 +67,7 @@ public class MemberDAO {
 			stmt.executeUpdate();
 			stmt.close();
 			
-//			OracleConnector.closeConnection();
+			OracleConnector.closeConnection();
 		}
 		catch(SQLException e) {
 			System.out.println("[deleteMember] SQLException : " + e.toString());
@@ -89,8 +107,8 @@ public class MemberDAO {
 				listMembers.add(member);
 			}
 		}
-		catch(SQLException e) {	
-			System.out.println("[getMembers] SQLException : " + e.toString()); //
+		catch(SQLException e) {
+			System.out.println("[getMembers] SQLException : " + e.toString());
 		}
 		finally {
 			try {
@@ -106,11 +124,16 @@ public class MemberDAO {
 				System.out.println("[getMembers] finally SQLException : " + e.toString());
 			}
 			
-//			OracleConnector.closeConnection();
+			OracleConnector.closeConnection();
 		}
 		
 		return listMembers;
 	}
 
+
+
+	
+	
+	
 	
 }

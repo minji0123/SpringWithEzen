@@ -2,33 +2,41 @@ package mimmi;
 
 import java.sql.Statement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OracleSQL {
+public class OracleSQL2 {
 
-	
+// 변수를 ?로 바꿔서 처리하기
 	public static void main(String[] args) {
-		OracleSQL hello = new OracleSQL();
-//		hello.insert("6000", "블로그", "010-1111-1111");
-//		hello.update("3000", "파이썬", "010-1111-1111");
-		hello.delete("6000");
-		hello.select();
+		System.out.println(">>> preparedStatement<<< ");
+		OracleSQL2 hello = new OracleSQL2();
+//		hello.select();
+//		hello.insert("5000", "자바5", "010-1111-1111");
+//		hello.select();
+//		hello.update("3000", "자바3", "010-1111-1111");
+//		hello.select();
+//		hello.delete("1");
+		hello.select("%1");
 	}
 	
 	
 	public void delete(String hid) {
-		String sql = String.format("DELETE FROM hello WHERE hid = %s ", hid);
+		String sql = String.format("DELETE FROM hello WHERE hid = ?");
 		
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		
 		System.out.println("HELLO table delete");
+		System.out.printf("hid %s 번 데이터 삭제\n",hid);
 		
 		try {			
 			conn = OracleConnector.getConnection();
-			stmt = conn.createStatement();
-			int success = stmt.executeUpdate(sql);// 처리 결과 갯수를 리턴
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, hid);
+			
+			int success = stmt.executeUpdate();// 처리 결과 갯수를 리턴
 			
 			if(success >0 ) { 
 				System.out.println("delete: 성공! "+success+ "개 삭제");
@@ -55,17 +63,21 @@ public class OracleSQL {
 
 	
 	public void update(String hid, String hname, String htel) {
-		String sql = String.format("UPDATE hello SET hname = '%s', htel ='%s' WHERE hid = %s ",hname, htel, hid);
+		String sql = String.format("UPDATE hello SET hname = ?, htel =? WHERE hid = ? ");
 		
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		
 		System.out.println("HELLO table update");
 		
 		try {			
 			conn = OracleConnector.getConnection();
-			stmt = conn.createStatement();
-			int success = stmt.executeUpdate(sql);// 처리 결과 갯수를 리턴
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, hname);
+			stmt.setString(2, htel);
+			stmt.setString(3, hid);
+			
+			int success = stmt.executeUpdate();// 처리 결과 갯수를 리턴
 			
 			if(success >0 ) { 
 				System.out.println("update: 성공! "+success+ "개 수정");
@@ -92,17 +104,22 @@ public class OracleSQL {
 	
 	
 	public void insert(String hid, String hname, String htel) {
-		String sql = String.format("INSERT INTO hello VALUES ('%s', '%s', '%s')",hid, hname, htel);
+		String sql = String.format("INSERT INTO hello VALUES (?, ?, ?)");
 		
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		
 		System.out.println("HELLO table insert");
 		
 		try {			
 			conn = OracleConnector.getConnection();
-			stmt = conn.createStatement();
-			int success = stmt.executeUpdate(sql);// 처리 결과 갯수를 리턴
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, hid);
+			stmt.setString(2, hname);
+			stmt.setString(3, htel);
+
+			
+			int success = stmt.executeUpdate();// 처리 결과 갯수를 리턴
 			
 			if(success >0 ) { 
 				System.out.println("insert: 성공! "+success + "개 생성");
@@ -129,17 +146,21 @@ public class OracleSQL {
 	
 	
 	
-	public void select() {
+	public void select(String query) {
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		ResultSet rset = null;
+		
 		System.out.println("HELLO table select");
+		System.out.println("찾는 값 : "+query);
 		try {
-			String sql = "SELECT * FROM hello ORDER BY hid";
+			String sql = "SELECT * FROM hello WHERE hname LIKE ? ORDER BY hname";
 			
 			conn = OracleConnector.getConnection();
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, query);
+			
+			rset = stmt.executeQuery();
 			
 			System.out.println("[HID]   [HNAME]   [HTEL]");
 			System.out.println("-------------------------------");
@@ -149,6 +170,7 @@ public class OracleSQL {
 				String hname = rset.getString(2);
 				String htel = rset.getString(3);
 				
+//				System.out.println("hid: "+ hid + " hname: "+ hname + " htel: "+ htel);
 				System.out.println(hid + "     "+ hname + "     "+ htel);
 
 			}

@@ -11,12 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/MemberServlet")
-public class MemberServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@WebServlet("/MemberList")
+public class MemberList extends HttpServlet {
        
 
-    public MemberServlet() {
+    public MemberList() {
     }
 
 
@@ -27,7 +26,7 @@ public class MemberServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.setContentType("Text/html;charset=UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 		
 		PrintWriter out = response.getWriter();
 		htmlHeader(out);
