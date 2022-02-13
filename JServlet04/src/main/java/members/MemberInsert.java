@@ -90,7 +90,7 @@ public class MemberInsert extends HttpServlet {
 		out.print("<td>등록일자</td>");
 		out.print("<td>삭제</td>");
 		out.print("</tr>");
-	}
+	}// htmlHeader
 	
 	static void htmlMembers(PrintWriter out) {
 		
@@ -108,15 +108,13 @@ public class MemberInsert extends HttpServlet {
 			out.printf("<td> <a href='/JServlet04/MemberInsert?command=deleteMember&mid=%s'>삭제</a></td>", member.getMid());
 			out.print("</tr>");
 		}
-	}
+	}// htmlMembers
 	
 	static void htmlFooter(PrintWriter out) {
 		out.print("</table>");
 		out.print("<a href='/JServlet04/MemberInsert.html'>멤버등록</a>");
 		out.print("</body></html>");
-	}
+	}// htmlFooter
 	
-	
-
 	
 }// end

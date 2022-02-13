@@ -35,7 +35,7 @@ public class MemberDAO {
 		catch(SQLException e) {
 			System.out.println("[insertMember] SQLException : " + e.toString());
 		}
-	}
+	}//insertMember
 	
 
 	public void deleteMember(String mid) {
@@ -54,7 +54,7 @@ public class MemberDAO {
 		catch(SQLException e) {
 			System.out.println("[deleteMember] SQLException : " + e.toString());
 		}
-	}
+	}//deleteMember
 	
 	
 	
@@ -110,7 +110,7 @@ public class MemberDAO {
 		}
 		
 		return listMembers;
-	}
+	}//getMembers
 
 	
 }
