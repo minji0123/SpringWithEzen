@@ -20,7 +20,7 @@ public class SessionServlet extends HttpServlet {
 		 * 페이지에서 자료를 공유할 수 있다.
 		 */
 		HttpSession session = request.getSession();
-		session.setAttribute("name", "아카데미");
+		session.setAttribute("name", "세션");
 		
 		String name = (String)session.getAttribute("name");
 		String tel = (String)session.getAttribute("tel");

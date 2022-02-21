@@ -1,7 +1,7 @@
 /*
  * JDBC Connection
  */
-package soldb;
+package minmi;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +10,9 @@ import java.sql.SQLException;
 public class OracleConnector {
 	final static String driver = "oracle.jdbc.driver.OracleDriver";
 	final static String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	// final static String url = "jdbc:oracle:thin:@SOLNET";
-	final static String userid = "SOLUSER";
-	final static String password = "SOLUSER";
-	// final static String userid = "SHYUSER";
-	// final static String password = "SHYUSER";
+	final static String userid = "MIMMI";
+	final static String password = "Rkrk6500**";
+
 	
 	private static Connection _stconn = null;
 	

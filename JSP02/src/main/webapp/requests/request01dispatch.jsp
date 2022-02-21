@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	request.setAttribute("name", "아카데미");
+	request.setAttribute("name", "post방식!!");
 	request.setAttribute("tel", "031-1234-5678");
 %>    
 <!DOCTYPE html>

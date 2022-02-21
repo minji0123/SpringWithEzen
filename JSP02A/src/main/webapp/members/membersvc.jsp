@@ -2,7 +2,7 @@
 	import="members.*"
     pageEncoding="UTF-8"%>
 <%
-	String uid = (String)session.getAttribute("userid");
+String uid = (String)session.getAttribute("userid");
 	if(uid == null) {
 		response.sendRedirect("memberlogin.html");
 		return;
@@ -24,9 +24,9 @@
 		System.out.printf("[membersvc] memberreg: (%s)(%s)(%s)(%s)%n", mid, mname, pwd, email);
 		
 		if(mid != null && mid.isEmpty() != true) {
-			MemberDAO dao = new MemberDAO();
-			MemberVO memberVO = new MemberVO(mid, mname, pwd, email);
-			dao.insertMember(memberVO);
+	TodoDAO dao = new TodoDAO();
+	TodoVO memberVO = new TodoVO(mid, mname, pwd, email);
+	dao.insertMember(memberVO);
 		}
 	}
 	else if(svcid.equals("memberupdate")) { // 멤버수정
@@ -37,9 +37,9 @@
 		System.out.printf("[membersvc] memberedit: (%s)(%s)(%s)(%s)%n", mid, mname, pwd, email);
 		
 		if(mid != null && mid.isEmpty() != true) {
-			MemberDAO dao = new MemberDAO();
-			MemberVO memberVO = new MemberVO(mid, mname, pwd, email);
-			dao.updateMember(memberVO);
+	TodoDAO dao = new TodoDAO();
+	TodoVO memberVO = new TodoVO(mid, mname, pwd, email);
+	dao.updateMember(memberVO);
 		}
 	}
 	else if(svcid.equals("memberedit")) { // 멤버수정
@@ -47,10 +47,10 @@
 		System.out.printf("[membersvc] memberedit: mid(%s)%n", mid);
 		
 		if(mid != null && mid.isEmpty() != true) {
-			request.setAttribute("mid", mid);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("memberedit.jsp");
-			dispatcher.forward(request, response);
-			return;
+	request.setAttribute("mid", mid);
+	RequestDispatcher dispatcher = request.getRequestDispatcher("memberedit.jsp");
+	dispatcher.forward(request, response);
+	return;
 		}
 	}
 	else if(svcid.equals("memberdel")) { // 멤버삭제
@@ -58,8 +58,8 @@
 		System.out.printf("[membersvc] memberdel: mid(%s)%n", mid);
 		
 		if(mid != null && mid.isEmpty() != true) {
-			MemberDAO dao = new MemberDAO();
-			dao.deleteMember(mid);
+	TodoDAO dao = new TodoDAO();
+	dao.deleteMember(mid);
 		}
 	}
 	else if(svcid.equals("memberdetail")) { // 멤버상세보기
@@ -67,12 +67,12 @@
 		System.out.printf("[membersvc] memberdetail: mid(%s)%n", mid);
 		
 		if(mid != null && mid.isEmpty() != true) {
-			MemberDAO dao = new MemberDAO();
-			MemberVO member = dao.getMember(mid);
-			request.setAttribute("member", member);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("memberdetail.jsp");
-			dispatcher.forward(request, response);
-			return;
+	TodoDAO dao = new TodoDAO();
+	TodoVO member = dao.getMember(mid);
+	request.setAttribute("member", member);
+	RequestDispatcher dispatcher = request.getRequestDispatcher("memberdetail.jsp");
+	dispatcher.forward(request, response);
+	return;
 		}
 	}
 	

@@ -1,7 +1,7 @@
 /*
  * JDBC Connection
  */
-package soldb;
+package minmi;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

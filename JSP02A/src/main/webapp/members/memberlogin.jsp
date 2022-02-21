@@ -2,14 +2,14 @@
 	import="members.*"
     pageEncoding="UTF-8"%>
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 
 	String userid = request.getParameter("userid");
 	String userpw = request.getParameter("userpw");
 	
-	MemberDAO memberDAO = new MemberDAO();
+	TodoDAO memberDAO = new TodoDAO();
 	boolean membered = memberDAO.isMember(userid, userpw);
-	MemberVO member = memberDAO.getMember(userid);
+	TodoVO member = memberDAO.getMember(userid);
 	
 	String logineduid = "none";
 	boolean logined = false;
@@ -17,8 +17,8 @@
 	if(membered) {
 		logineduid = (String)session.getAttribute("userid");
 		if(logineduid != null) {
-			session.removeAttribute("userid");
-			logined = true;
+	session.removeAttribute("userid");
+	logined = true;
 		}
 		session.setAttribute("userid", userid);
 	}

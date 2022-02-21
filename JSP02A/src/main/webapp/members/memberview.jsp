@@ -3,7 +3,7 @@
 	import="java.util.List"
     pageEncoding="UTF-8"%>
 <%
-	String uid = (String)session.getAttribute("userid");
+String uid = (String)session.getAttribute("userid");
 	if(uid == null) {
 		response.sendRedirect("memberlogin.html");
 		return;
@@ -11,8 +11,8 @@
 
 	request.setCharacterEncoding("UTF-8");
 
-	MemberDAO dao = new MemberDAO();
-	List<MemberVO> members = dao.getMembers();
+	TodoDAO dao = new TodoDAO();
+	List<TodoVO> members = dao.getMembers();
 %>    
 <!DOCTYPE html>
 <html>
@@ -42,9 +42,9 @@
 		</tr>
 		
 <%
-for(int cnt=0; cnt < members.size(); cnt++) {
-	MemberVO mem = (MemberVO)members.get(cnt);
-%>
+		for(int cnt=0; cnt < members.size(); cnt++) {
+			TodoVO mem = (TodoVO)members.get(cnt);
+		%>
 		<tr>
 			<td><a href="membersvc.jsp?svcid=memberdetail&mid=<%=mem.getMid()%>"><%=mem.getMid()%></a></td>
 			<td><%=mem.getMname()%></td>

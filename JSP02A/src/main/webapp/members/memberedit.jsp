@@ -2,7 +2,7 @@
 	import="members.*"
     pageEncoding="UTF-8"%>
 <%
-	String uid = (String)session.getAttribute("userid");
+String uid = (String)session.getAttribute("userid");
 	if(uid == null) {
 		response.sendRedirect("memberlogin.html");
 		return;
@@ -11,8 +11,8 @@
 	request.setCharacterEncoding("UTF-8");
 	String mid = (String)request.getParameter("mid");
 	
-	MemberDAO dao = new MemberDAO();
-	MemberVO member = dao.getMember(mid);
+	TodoDAO dao = new TodoDAO();
+	TodoVO member = dao.getMember(mid);
 %>    
 <!DOCTYPE html>
 <html>

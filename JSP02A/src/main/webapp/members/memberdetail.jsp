@@ -2,8 +2,8 @@
 	import="members.*"
     pageEncoding="UTF-8"%>
 <%
-	request.setCharacterEncoding("UTF-8");
-	MemberVO member = (MemberVO)request.getAttribute("member");
+request.setCharacterEncoding("UTF-8");
+	TodoVO member = (TodoVO)request.getAttribute("member");
 %>    
 <!DOCTYPE html>
 <html>

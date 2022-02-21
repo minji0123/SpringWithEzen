@@ -8,8 +8,9 @@
 </head>
 <body>
 	<h1>HTTP 500 오류</h1>
-	<h3>서버 장애로 서비스를 할 수 없습니다.</h3>
-	<hr>
-	<p>관리자에게 문의하시거나 나중에 다시 접속하세요.</p>
+	<div style='padding:10px; border:1px solid black; border-radius:5px;'>
+		<h3>서버 장애로 서비스를 할 수 없습니다.</h3>
+		<p>관리자에게 문의하시거나 나중에 다시 접속하세요.</p>
+	</div>
 </body>
 </html>
